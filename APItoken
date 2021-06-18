@@ -1,0 +1,25 @@
+import requests
+  import json
+
+  ids = '123;456;e3145e8-0648-11e8-934e-00163e00' # 支持id和notebook_id，用;分开。不填则返回全部正在运行的自己和已订阅的计划交易信息
+
+  key = '''
+  tk_d48bdd21da96587c22a496ba726182b7
+''' 
+
+
+  def request_plan_order():
+      url = 'https://bigquant.com/bigwebapi/algo_info/planned_orders'
+      headers = {'Authorization': 'Bearer {}'.format(key.strip().replace("\n", ""))}
+      data = {
+          'id_list': ids
+      }
+      r = requests.post(url=url, data=data, headers=headers)
+      res_dict = json.loads(r.text)
+      return res_dict
+
+
+  if __name__ == '__main__':
+      res = request_plan_order()
+      print(res)
+        
